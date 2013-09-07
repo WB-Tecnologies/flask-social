@@ -175,10 +175,10 @@ def login_handler(response, provider, query):
                       provider=provider,
                       oauth_response=response)
 
-    next = get_url(_security.login_manager.login_view)
+    # next = get_url(_security.login_manager.login_view)
     msg = '%s account not associated with an existing user' % provider.name
     do_flash(msg, 'error')
-    return redirect(next)
+    return redirect('/')
 
 
 def login_callback(provider_id):
