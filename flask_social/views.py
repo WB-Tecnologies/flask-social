@@ -171,13 +171,16 @@ def login_handler(response, provider, query):
 
         return redirect(redirect_url)
 
-    login_failed.send(current_app._get_current_object(),
+    result = login_failed.send(current_app._get_current_object(),
                       provider=provider,
                       oauth_response=response)
 
-    # next = get_url(_security.login_manager.login_view)
     msg = '%s account not associated with an existing user' % provider.name
     do_flash(msg, 'error')
+
+    if result:
+        return result
+
     return redirect('/')
 
 
