@@ -178,8 +178,8 @@ def login_handler(response, provider, query):
     msg = '%s account not associated with an existing user' % provider.name
     do_flash(msg, 'error')
 
-    if result:
-        return result
+    if len(result):
+        return result[0][1]
 
     return redirect('/')
 
